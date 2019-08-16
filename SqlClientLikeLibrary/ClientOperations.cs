@@ -18,6 +18,9 @@ namespace SqlClientLikeLibrary
             DefaultCatalog = "NorthWindAzure2";
             
         }
+        /*
+         * Looking for Marketing managers
+         */
         private string SelectStatement() =>
             @"SELECT  Cust.CustomerIdentifier ,
                         Cust.CompanyName ,

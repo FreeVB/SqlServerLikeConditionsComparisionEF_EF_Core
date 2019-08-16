@@ -13,17 +13,18 @@ namespace EntityFrameworkCoreLikeLibrary
             using (var context = new NorthWindContext())
             {
                 var customerData = (context.Customers
-                    .Join(context.ContactType, customer => customer.ContactTypeIdentifier,
-                        contactType => contactType.ContactTypeIdentifier,
-                        (customer, contactType) => new {customer, contactType}) 
-                    .Join(context.Contact, cust => cust.customer.ContactIdentifier, contact => contact.ContactIdentifier,
-                        (custContType, contact) => new {item = custContType, contact})
+                    .Join(context.ContactType, customer => customer.ContactTypeIdentifier,contactType => contactType.ContactTypeIdentifier,(customer, contactType) => new {customer, contactType}) 
+                    .Join(context.Contact, cust => cust.customer.ContactIdentifier, contact => contact.ContactIdentifier,(custContType, contact) => new {item = custContType, contact})
                     .Where(items =>
+                        /*
+                         * Looking for Marketing managers
+                         */
                         items.@item.customer.ContactTypeIdentifier == 5 && 
                         /*
                          * Here is the starts with clause
                          */
                         Functions.Like(items.@item.customer.CompanyName, pContains))
+
                     .Select(item => new CustomerEntity
                     {
                         CustomerIdentifier = item.@item.customer.CustomerIdentifier,
