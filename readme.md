@@ -1,0 +1,1 @@
+### Comparing SqlClient, EF6, EF Core Like condition
