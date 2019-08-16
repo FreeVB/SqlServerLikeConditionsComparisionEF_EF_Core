@@ -70,6 +70,81 @@ namespace EntityFrameworkCoreLikeLibrary
 
                 return customerData;
             }
+
+        }
+        public List<CustomerEntity> GetCustomersStartWithEndWithLinq(string pCondition)
+        {
+            using (var context = new NorthWindContext())
+            {
+                var customerData = (
+                    from customer in context.Customers
+                    join contactType in context.ContactType on customer.ContactTypeIdentifier equals contactType.ContactTypeIdentifier
+                    join contact in context.Contact on customer.ContactIdentifier equals contact.ContactIdentifier
+                    where Functions.Like(customer.CompanyName, pCondition) && customer.ContactTypeIdentifier == 5
+                    select new CustomerEntity
+                    {
+                        CustomerIdentifier = customer.CustomerIdentifier,
+                        CompanyName = customer.CompanyName,
+                        ContactIdentifier = customer.ContactIdentifier,
+                        FirstName = contact.FirstName,
+                        LastName = contact.LastName,
+                        ContactTypeIdentifier = contactType.ContactTypeIdentifier,
+                        ContactTitle = contactType.ContactTitle,
+                        City = customer.City,
+                        PostalCode = customer.PostalCode,
+                        CountryIdentifier = customer.CountryIdentfier,
+                        CountyName = customer.CountryIdentfierNavigation.CountryName
+                    }).ToList();
+
+                return customerData;
+            }
+
+        }
+        public List<CustomerEntity> GetCustomersWhereSecondLetterIs(string pCondition)
+        {
+            using (var context = new NorthWindContext())
+            {
+                
+                var customerData = (
+                    from customer in context.Customers
+                    join contactType in context.ContactType on customer.ContactTypeIdentifier equals contactType.ContactTypeIdentifier
+                    join contact in context.Contact on customer.ContactIdentifier equals contact.ContactIdentifier
+                    where Functions.Like(customer.CompanyName, pCondition) 
+                    select new CustomerEntity
+                    {
+                        CustomerIdentifier = customer.CustomerIdentifier,
+                        CompanyName = customer.CompanyName,
+                        ContactIdentifier = customer.ContactIdentifier,
+                        FirstName = contact.FirstName,
+                        LastName = contact.LastName,
+                        ContactTypeIdentifier = contactType.ContactTypeIdentifier,
+                        ContactTitle = contactType.ContactTitle,
+                        City = customer.City,
+                        PostalCode = customer.PostalCode,
+                        CountryIdentifier = customer.CountryIdentfier,
+                        CountyName = customer.CountryIdentfierNavigation.CountryName
+                    }).ToList();
+
+                return customerData;
+            }
+
+        }
+
+        public List<Customers> GetCustomersWhereNameBeginsWithRange(string pCondition)
+        {
+            using (var context = new NorthWindContext())
+            {
+
+                var customerData = (
+                    from customer in context.Customers
+                    where Functions.Like(customer.CompanyName, pCondition)
+                    select customer
+                    
+                ).OrderBy(x => x.CompanyName).ToList();
+
+                return customerData;
+            }
+
         }
     }
 }

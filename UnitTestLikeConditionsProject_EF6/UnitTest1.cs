@@ -14,4 +14,5 @@ namespace UnitTestLikeConditionsProject_EF6
             Assert.IsTrue(results.Count == 2, "Expected two for EF6 test");
         }
     }
+    
 }
