@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestLikeConditionsEF_CoreProject
 {
-    [TestClass]
+    [TestClass()]
     public class UnitTest1
     {
         [TestMethod]

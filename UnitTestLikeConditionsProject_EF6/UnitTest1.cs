@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestLikeConditionsProject_EF6
 {
-    [TestClass]
+    [TestClass(), TestCategory("EF 6 code first with existing db")]
     public class UnitTest1
     {
         [TestMethod]

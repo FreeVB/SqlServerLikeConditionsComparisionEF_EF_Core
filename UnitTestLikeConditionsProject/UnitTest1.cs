@@ -3,7 +3,7 @@ using SqlClientLikeLibrary;
 
 namespace UnitTestLikeConditionsProject
 {
-    [TestClass]
+    [TestClass(), TestCategory("SqlClient")]
     public class UnitTest1
     {
         [TestMethod]
