@@ -9,7 +9,7 @@ namespace EntityFramework6LikeLibrary
 {
     public class EntityFramework6Operations
     {
-        public List<CustomerEntity> GetCustomersWithContains(string pContains)
+        public List<CustomerEntity> GetCustomersWithStartWith(string pContains)
         {
             using (var context = new NorthWindContext())
             {

@@ -11,7 +11,10 @@ namespace UnitTestLikeConditionsEF_CoreProject
         public void TestMethod1()
         {
             var ops = new EntityFrameworkCoreOperations();
-            var results = ops.GetCustomersWithContains("Fr%");
+            var results = ops.GetCustomersStartsWithLambda("Fr%");
+            Assert.IsTrue(results.Count == 2, "Expected two for EF Core test");
+
+            results = ops.GetCustomersStartWithLinq("Fr%");
             Assert.IsTrue(results.Count == 2, "Expected two for EF Core test");
         }
     }

@@ -8,7 +8,7 @@ namespace EntityFrameworkCoreLikeLibrary
 {
     public class EntityFrameworkCoreOperations
     {
-        public List<CustomerEntity> GetCustomersWithContains(string pContains)
+        public List<CustomerEntity> GetCustomersStartsWithLambda(string pContains)
         {
             using (var context = new NorthWindContext())
             {
@@ -44,19 +44,31 @@ namespace EntityFrameworkCoreLikeLibrary
 
             }
         }
-        public List<CustomerEntity> GetCustomersWithContainsFunc(string pContains) 
+        public List<CustomerEntity> GetCustomersStartWithLinq(string pContains)
         {
             using (var context = new NorthWindContext())
             {
-                var customerData = (context.Customers
-                    .Join(context.ContactType, customer => customer.ContactTypeIdentifier,
-                        contactType => contactType.ContactTypeIdentifier,
-                        (customer, contactType) => new {customer, contactType})
-                    .Join(context.Contact, @t => @t.customer.ContactIdentifier, contact => contact.ContactIdentifier,
-                        (@t, contact) => @t.customer)).Where(c => Functions.Like(c.CompanyName, "%horn%"));
+                var customerData = (
+                    from customer in context.Customers
+                    join contactType in context.ContactType on customer.ContactTypeIdentifier equals contactType.ContactTypeIdentifier
+                    join contact in context.Contact on customer.ContactIdentifier equals contact.ContactIdentifier
+                    where Functions.Like(customer.CompanyName, pContains) && customer.ContactTypeIdentifier == 5
+                    select new CustomerEntity
+                    {
+                        CustomerIdentifier = customer.CustomerIdentifier,
+                        CompanyName = customer.CompanyName,
+                        ContactIdentifier = customer.ContactIdentifier,
+                        FirstName = contact.FirstName,
+                        LastName = contact.LastName,
+                        ContactTypeIdentifier = contactType.ContactTypeIdentifier,
+                        ContactTitle = contactType.ContactTitle,
+                        City = customer.City,
+                        PostalCode = customer.PostalCode,
+                        CountryIdentifier = customer.CountryIdentfier,
+                        CountyName = customer.CountryIdentfierNavigation.CountryName
+                    }).ToList();
 
-                
-                return new List<CustomerEntity>();
+                return customerData;
             }
         }
     }
