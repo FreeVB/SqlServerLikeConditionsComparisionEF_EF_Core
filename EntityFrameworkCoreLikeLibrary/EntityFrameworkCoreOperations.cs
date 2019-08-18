@@ -18,23 +18,22 @@ namespace EntityFrameworkCoreLikeLibrary
                 return resultsContactTypes;
             }
         }
-
-        public List<CustomerEntity> GetCustomersStartsWithLambda(LikeOptions pNameCondition, string pName, int pContactType)
+        /// <summary>
+        /// Multi condition filter with main filter on company name like
+        /// </summary>
+        /// <param name="pNameCondition">Company name like text</param>
+        /// <param name="pName">Text to filter on company name</param>
+        /// <param name="pContactType">contact type from contact type reference table</param>
+        /// <returns></returns>
+        public List<CustomerEntity> GetCustomersLikeCustomerEntities(LikeOptions pNameCondition, string pName, int pContactType)
         {
             var nameFilter = "";
-            switch (pNameCondition)
-            {
-                case LikeOptions.StartsWith:
-                    nameFilter = $"{pName}%";
-                    break;
-                case LikeOptions.Contains:
-                    nameFilter = $"%{pName}%";
-                    break;
-                case LikeOptions.EndsWith:
-                    nameFilter = $"{pName}%";
-                    break;
+            if (pNameCondition == LikeOptions.StartsWith)
+                nameFilter = $"{pName}%";
+            else if (pNameCondition == LikeOptions.Contains)
+                nameFilter = $"%{pName}%";
+            else if (pNameCondition == LikeOptions.EndsWith) nameFilter = $"{pName}%";
 
-            }
             using (var context = new NorthWindContext())
             {
                 var customerData = (

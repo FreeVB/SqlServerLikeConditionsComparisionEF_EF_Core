@@ -49,7 +49,7 @@ namespace LikeConditionsWithEntityFrameworkCore
 
             var ops = new EntityFrameworkCoreOperations();
             
-            var customerEntities = ops.GetCustomersStartsWithLambda(
+            var customerEntities = ops.GetCustomersLikeCustomerEntities(
                 nameCondition, 
                 CompanyNameFindTextBox.Text,
                 contactTypeCondition);
