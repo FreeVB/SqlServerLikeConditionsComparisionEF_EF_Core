@@ -14,7 +14,7 @@ namespace SqlClientLikeLibrary
     {
         public ClientOperations()
         {
-            DatabaseServer = ".\\SQLEXPRESS";
+            DatabaseServer = "KARENS-PC";
             DefaultCatalog = "NorthWindAzure2";
             
         }

@@ -27,7 +27,7 @@ namespace EntityFrameworkCoreLikeLibrary.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    "Server=.\\SQLEXPRESS;Database=NorthWindAzure2;Trusted_Connection=True;");
+                    "Server=KARENS-PC;Database=NorthWindAzure2;Trusted_Connection=True;");
             }
         }
 

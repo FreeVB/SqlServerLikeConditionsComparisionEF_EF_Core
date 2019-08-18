@@ -25,6 +25,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		assets\script.sql = assets\script.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows Forms", "Windows Forms", "{45C3DC3E-261C-4B41-97BF-3A6B71B03ED1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LikeConditionsWithEntityFrameworkCore", "LikeConditionsWithEntityFrameworkCore\LikeConditionsWithEntityFrameworkCore.csproj", "{28D24A15-5261-4440-B66E-6A5141FEF3F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExtensionsLibrary", "LanguageExtensionsLibrary\LanguageExtensionsLibrary.csproj", "{EF0323C0-88E5-4F62-BCE6-CECCA7E9CAC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +61,14 @@ Global
 		{F5E30C0D-7262-4AAF-8A7C-3A9066973622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5E30C0D-7262-4AAF-8A7C-3A9066973622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5E30C0D-7262-4AAF-8A7C-3A9066973622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D24A15-5261-4440-B66E-6A5141FEF3F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D24A15-5261-4440-B66E-6A5141FEF3F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D24A15-5261-4440-B66E-6A5141FEF3F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D24A15-5261-4440-B66E-6A5141FEF3F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF0323C0-88E5-4F62-BCE6-CECCA7E9CAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0323C0-88E5-4F62-BCE6-CECCA7E9CAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0323C0-88E5-4F62-BCE6-CECCA7E9CAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0323C0-88E5-4F62-BCE6-CECCA7E9CAC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +80,8 @@ Global
 		{06E4E5F8-BC87-4C19-B184-71DB8419E6EB} = {DAC5E61B-5444-4F49-A0E9-C0CA776E608A}
 		{F3A7259F-9120-4DF6-85D2-744CB23C72B7} = {7786F85F-418A-4653-B284-BB8645ED1CF4}
 		{F5E30C0D-7262-4AAF-8A7C-3A9066973622} = {DAC5E61B-5444-4F49-A0E9-C0CA776E608A}
+		{28D24A15-5261-4440-B66E-6A5141FEF3F2} = {45C3DC3E-261C-4B41-97BF-3A6B71B03ED1}
+		{EF0323C0-88E5-4F62-BCE6-CECCA7E9CAC4} = {7786F85F-418A-4653-B284-BB8645ED1CF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC20ABC7-551F-45F5-8C83-2F27464D897B}

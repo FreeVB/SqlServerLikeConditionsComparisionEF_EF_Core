@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using EntityFrameworkCoreLikeLibrary.Models;
+using LikeConditionsWithEntityFrameworkCore.Classes;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.EF;
 
@@ -8,6 +9,62 @@ namespace EntityFrameworkCoreLikeLibrary
 {
     public class EntityFrameworkCoreOperations
     {
+        public List<ContactType> ContactTypesList()
+        {
+            using (var context = new NorthWindContext())
+            {
+                var resultsContactTypes = context.ContactType.ToList();
+                resultsContactTypes.Insert(0, new ContactType() {ContactTypeIdentifier = 0, ContactTitle = "None"});
+                return resultsContactTypes;
+            }
+        }
+
+        public List<CustomerEntity> GetCustomersStartsWithLambda(LikeOptions pNameCondition, string pName, int pContactType)
+        {
+            var nameFilter = "";
+            switch (pNameCondition)
+            {
+                case LikeOptions.StartsWith:
+                    nameFilter = $"{pName}%";
+                    break;
+                case LikeOptions.Contains:
+                    nameFilter = $"%{pName}%";
+                    break;
+                case LikeOptions.EndsWith:
+                    nameFilter = $"{pName}%";
+                    break;
+
+            }
+            using (var context = new NorthWindContext())
+            {
+                var customerData = (
+                    from customer in context.Customers
+                    join contactType in context.ContactType on customer.ContactTypeIdentifier equals contactType.ContactTypeIdentifier
+                    join contact in context.Contact on customer.ContactIdentifier equals contact.ContactIdentifier
+                    where Functions.Like(customer.CompanyName, nameFilter)
+                    select new CustomerEntity
+                    {
+                        CustomerIdentifier = customer.CustomerIdentifier,
+                        CompanyName = customer.CompanyName,
+                        ContactIdentifier = customer.ContactIdentifier,
+                        FirstName = contact.FirstName,
+                        LastName = contact.LastName,
+                        ContactTypeIdentifier = contactType.ContactTypeIdentifier,
+                        ContactTitle = contactType.ContactTitle,
+                        City = customer.City,
+                        PostalCode = customer.PostalCode,
+                        CountryIdentifier = customer.CountryIdentfier,
+                        CountyName = customer.CountryIdentfierNavigation.CountryName
+                    }).ToList();
+
+                if (pContactType > 0)
+                {
+                    customerData = customerData.Where(x => x.ContactTypeIdentifier == pContactType).ToList();
+                }
+                return customerData;
+            }
+        }
+
         public List<CustomerEntity> GetCustomersStartsWithLambda(string pContains)
         {
             using (var context = new NorthWindContext())

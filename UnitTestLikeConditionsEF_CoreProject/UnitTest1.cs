@@ -22,6 +22,7 @@ namespace UnitTestLikeConditionsEF_CoreProject
         {
             var ops = new EntityFrameworkCoreOperations();
             var results = ops.GetCustomersStartWithEndWithLinq("f%d");
+
             Assert.IsTrue(results.Count == 1, "Expected 1 for EF Core starts and ends with");
         }
         [TestMethod]
@@ -29,6 +30,7 @@ namespace UnitTestLikeConditionsEF_CoreProject
         {
             var ops = new EntityFrameworkCoreOperations();
             var results = ops.GetCustomersWhereSecondLetterIs("_u%");
+
             Assert.IsTrue(results.Count == 9, "Expected nine for EF Core starts and ends with");
         }
         [TestMethod]
@@ -36,6 +38,7 @@ namespace UnitTestLikeConditionsEF_CoreProject
         {
             var ops = new EntityFrameworkCoreOperations();
             var results = ops.GetCustomersWhereNameBeginsWithRange("[DA]%");
+
             foreach (var customerEntity in results)
             {
                 Console.WriteLine(customerEntity.CompanyName);

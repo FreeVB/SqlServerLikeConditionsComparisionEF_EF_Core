@@ -13,5 +13,12 @@ namespace UnitTestLikeConditionsProject
             var dt = ops.GetCustomersWithContains("Fr");
             Assert.IsTrue(dt.Rows.Count == 2, "Expected two for SqlClient test");
         }
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            var ops = new ClientOperations();
+            var dt = ops.GetCustomersWithContains("Fr");
+            Assert.IsTrue(dt.Rows.Count == 2, "Expected two for SqlClient test");
+        }
     }
 }
