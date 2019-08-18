@@ -1,11 +1,27 @@
 ﻿using System;
+using EntityFrameworkCoreLikeLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace EntityFrameworkCoreLikeLibrary.Models
 {
     public partial class NorthWindContext : DbContext
     {
+        // verbose
+        //public static readonly ILoggerFactory LoggerFactory = new LoggerFactory(new[] {
+        //    new ConsoleLoggerProvider((_, __) => true, true)
+        //});
+
+
+        public static readonly ILoggerFactory consoleLoggerSqlOnlyFactory
+            = new LoggerFactory(new[] 
+            {
+                new ConsoleLoggerProvider((category, level) => category == DbLoggerCategory.Database.Command.Name && 
+                                                               level == LogLevel.Information, true)
+            });
+
         public NorthWindContext()
         {
         }
@@ -26,9 +42,18 @@ namespace EntityFrameworkCoreLikeLibrary.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(
-                    "Server=KARENS-PC;Database=NorthWindAzure2;Trusted_Connection=True;");
+
+                var connectionString = "Server=KARENS-PC;Database=NorthWindAzure2;Trusted_Connection=True;";
+
+#if (EFC_LOG_ENABLED)
+                optionsBuilder.UseLoggerFactory(consoleLoggerSqlOnlyFactory)
+                    .EnableSensitiveDataLogging()
+                    .UseSqlServer(connectionString);
+#else
+        optionsBuilder.UseSqlServer(connectionString);
+#endif
             }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
